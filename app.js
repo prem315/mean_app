@@ -1,4 +1,4 @@
-var app = angular.module('myStory', []);
+var app = angular.module('myStory', ['ui.router']);
 
 app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
   $scope.test = 'Hello world!';
@@ -35,4 +35,20 @@ app.factory('posts', [function(){
     posts: []
   };
   return o;
+}]);
+
+
+app.config([
+'$stateProvider',
+'$urlRouterProvider',
+function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      templateUrl: '/home.html',
+      controller: 'MainCtrl'
+    });
+
+  $urlRouterProvider.otherwise('home');
 }]);
